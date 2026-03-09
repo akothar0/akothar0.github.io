@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aditya Kothari | Portfolio</title>
+  <meta name="description" content="Portfolio of Aditya Kothari, Technical Product Manager." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    /* Core design tokens for theme, spacing, and motion. */
+    :root {
+      --bg: #0c0c0e;
+      --bg-soft: #141418;
+      --text: #e8e8ec;
+      --text-muted: #9b9ba4;
+      --text-dim: #75757f;
+      --accent: #34d399;
+      --border: #222228;
+      --container: 980px;
+      --radius: 14px;
+      --transition: 220ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Outfit", sans-serif;
+      background: radial-gradient(circle at 15% -10%, #1b1b22 0%, var(--bg) 40%), var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(100% - 2.5rem, var(--container));
+      margin: 0 auto;
+    }
+
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: background-color var(--transition), border-color var(--transition), backdrop-filter var(--transition);
+      border-bottom: 1px solid transparent;
+    }
+
+    .site-nav.scrolled {
+      background: rgba(12, 12, 14, 0.72);
+      border-color: rgba(34, 34, 40, 0.9);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .nav-inner {
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand,
+    .nav-links a,
+    .meta,
+    .section-label,
+    .hero-links,
+    .entry-date,
+    .footer-text {
+      font-family: "JetBrains Mono", monospace;
+    }
+
+    .brand {
+      font-size: 0.95rem;
+      letter-spacing: 0.1em;
+      color: var(--text);
+      transition: color var(--transition);
+    }
+
+    .brand:hover {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.4rem;
+    }
+
+    .nav-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: color var(--transition);
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--accent);
+    }
+
+    main {
+      padding: 2.25rem 0 5rem;
+    }
+
+    section {
+      opacity: 0;
+      transform: translateY(12px);
+      animation: section-in 560ms cubic-bezier(0.2, 0.75, 0.25, 1) forwards;
+      margin-bottom: 4.5rem;
+    }
+
+    section:nth-of-type(1) { animation-delay: 120ms; }
+    section:nth-of-type(2) { animation-delay: 220ms; }
+    section:nth-of-type(3) { animation-delay: 320ms; }
+    section:nth-of-type(4) { animation-delay: 420ms; }
+
+    @keyframes section-in {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero h1 {
+      font-family: "Fraunces", serif;
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      line-height: 1.05;
+      letter-spacing: 0.01em;
+      margin: 0 0 1rem;
+      font-weight: 700;
+    }
+
+    .hero p {
+      max-width: 74ch;
+      color: var(--text-muted);
+      margin: 0;
+      font-size: clamp(1rem, 2.4vw, 1.2rem);
+    }
+
+    .hero-links {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-links a {
+      color: var(--accent);
+      transition: color var(--transition), transform var(--transition);
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .hero-links a:hover,
+    .hero-links a:focus-visible {
+      color: #66e3b1;
+      transform: translateY(-1px);
+    }
+
+    .divider {
+      color: var(--text-dim);
+      user-select: none;
+    }
+
+    .section-label {
+      margin: 0 0 1.05rem;
+      color: var(--text-dim);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(20, 20, 24, 0.95) 0%, rgba(20, 20, 24, 0.78) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.35rem 1.4rem;
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: #2a2a31;
+      box-shadow: 0 18px 28px rgba(0, 0, 0, 0.28);
+    }
+
+    .work-title {
+      font-family: "Fraunces", serif;
+      font-size: clamp(1.35rem, 3.2vw, 1.75rem);
+      margin: 0;
+    }
+
+    .meta {
+      margin: 0.5rem 0 0.95rem;
+      color: var(--text-dim);
+      font-size: 0.74rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .work-desc {
+      margin: 0;
+      color: var(--text-muted);
+      max-width: 78ch;
+    }
+
+    .inline-links {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.95rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.8rem;
+    }
+
+    .inline-links a {
+      color: var(--accent);
+      transition: color var(--transition), transform var(--transition);
+    }
+
+    .inline-links a:hover,
+    .inline-links a:focus-visible {
+      color: #66e3b1;
+      transform: translateY(-1px);
+    }
+
+    .tags {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+
+    .tag {
+      border: 1px solid #2a2a2f;
+      border-radius: 999px;
+      padding: 0.27rem 0.62rem;
+      font-size: 0.73rem;
+      color: #b9b9c1;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .entry {
+      padding: 0.95rem 0 1.35rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .entry:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.18rem;
+    }
+
+    .entry-company {
+      margin: 0;
+      font-family: "Fraunces", serif;
+      font-size: 1.26rem;
+      line-height: 1.2;
+      font-weight: 600;
+    }
+
+    .entry-date {
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    .entry-role {
+      margin: 0 0 0.55rem;
+      color: #b6b6be;
+      font-size: 0.98rem;
+    }
+
+    .entry p {
+      margin: 0;
+      color: var(--text-muted);
+      max-width: 80ch;
+    }
+
+    .edu-sub {
+      margin: 0.2rem 0 0.5rem;
+      color: #c1c1c8;
+      font-size: 0.98rem;
+    }
+
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 1.4rem 0 2rem;
+    }
+
+    .footer-text {
+      margin: 0;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      letter-spacing: 0.03em;
+    }
+
+    .footer-text a {
+      color: var(--accent);
+      transition: color var(--transition);
+    }
+
+    .footer-text a:hover,
+    .footer-text a:focus-visible {
+      color: #66e3b1;
+    }
+
+    /* Mobile layout adjustments for tighter screens. */
+    @media (max-width: 760px) {
+      .container {
+        width: min(100% - 1.5rem, var(--container));
+      }
+
+      .nav-inner {
+        height: 60px;
+      }
+
+      .nav-links {
+        gap: 0.85rem;
+      }
+
+      .nav-links a {
+        font-size: 0.71rem;
+      }
+
+      main {
+        padding-top: 1.5rem;
+      }
+
+      section {
+        margin-bottom: 3.3rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .entry-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.24rem;
+      }
+
+      .entry-company {
+        font-size: 1.12rem;
+      }
+
+      .entry-date {
+        font-size: 0.72rem;
+      }
+
+      .card {
+        padding: 1.1rem;
+      }
+    }
+
+    /* Respect reduced-motion preferences for accessibility. */
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      section {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sticky top navigation with frosted effect on scroll. -->
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="container nav-inner">
+      <a class="brand" href="#top">AK</a>
+      <div class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top" class="container">
+    <!-- Hero: concise profile summary and primary links. -->
+    <section class="hero" aria-labelledby="hero-title">
+      <h1 id="hero-title">Aditya Kothari</h1>
+      <p>
+        Technical Product Manager with 5+ years of experience. Shipped agentic recommendation
+        systems at eBay, scaled an online jobs marketplace to $5M ARR &amp; 4M Monthly Active Users
+        at Apna. MBA × MS Computer Science at UChicago. Industrial Engineering at IIT Kharagpur.
+      </p>
+      <div class="hero-links">
+        <a href="mailto:aditya.kothari@chicagobooth.edu">aditya.kothari@chicagobooth.edu</a>
+        <span class="divider">•</span>
+        <a href="https://www.linkedin.com/in/kothariaditya/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+        <span class="divider">•</span>
+        <a href="https://github.com/akothar0" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+        <span class="divider">•</span>
+        <a href="resume.pdf" target="_blank" rel="noopener noreferrer">Resume ↗</a>
+      </div>
+    </section>
+
+    <!-- Work: featured project card and supporting metadata. -->
+    <section id="work" aria-labelledby="work-title">
+      <h2 id="work-title" class="section-label">Work</h2>
+      <article class="card" aria-label="Mint AI Sports Card Discovery project">
+        <h3 class="work-title">Mint — AI Sports Card Discovery</h3>
+        <p class="meta">React · Vite · AI Recommendations · 2025</p>
+        <p class="work-desc">
+          Built as my final project for the UI/UX Design course in UChicago's MS in Computer
+          Science program, taught by Prof. Andre Marques. The sports trading card market is
+          valued at $10B+ and growing, but the collector experience is fragmented across 5-6
+          platforms. I conducted user research with collectors ranging from casual hobbyists to
+          investor-collectors, identified discovery as the core bottleneck, and built Mint — an
+          AI-powered platform that personalizes card recommendations, surfaces market intelligence,
+          and tracks collection value.
+        </p>
+        <div class="inline-links">
+          <a href="https://mint-omega-bay.vercel.app/" target="_blank" rel="noopener noreferrer">Live App →</a>
+          <a href="https://github.com/akothar0/Mint-Sports-Cards" target="_blank" rel="noopener noreferrer">GitHub →</a>
+          <a href="#" aria-label="Read the case study">Read the case study →</a>
+        </div>
+        <div class="tags" aria-label="Project tags">
+          <span class="tag">User Research</span>
+          <span class="tag">UX Design</span>
+          <span class="tag">AI/ML</span>
+          <span class="tag">Marketplace Discovery</span>
+          <span class="tag">React</span>
+          <span class="tag">Product Strategy</span>
+        </div>
+      </article>
+    </section>
+
+    <!-- Experience: reverse-chronological role history. -->
+    <section id="experience" aria-labelledby="experience-title">
+      <h2 id="experience-title" class="section-label">Experience</h2>
+
+      <article class="entry">
+        <div class="entry-header">
+          <h3 class="entry-company">eBay</h3>
+          <span class="entry-date">Jun 2025 – Aug 2025</span>
+        </div>
+        <p class="entry-role">Technical Product Manager Intern — Discovery &amp; Personalization</p>
+        <p>
+          Worked on homepage personalization for eBay's Trading Cards vertical. Explored agentic
+          recommendation approaches combining LLMs with knowledge graphs. Prototyped prompt
+          strategies in NodeJS to de-risk core model assumptions before A/B experimentation.
+        </p>
+      </article>
+
+      <article class="entry">
+        <div class="entry-header">
+          <h3 class="entry-company">Apna</h3>
+          <span class="entry-date">Jun 2023 – May 2024</span>
+        </div>
+        <p class="entry-role">Product Manager — User Growth</p>
+        <p>
+          Led cross-functional team to define and execute the user-growth roadmap, driving a 30%
+          increase in MAU to 4M. Implemented AI job recommendations via push notifications and
+          WhatsApp, built an automated job aggregation system, and ran 15+ cross-channel campaigns
+          achieving 1M+ daily touchpoints.
+        </p>
+      </article>
+
+      <article class="entry">
+        <div class="entry-header">
+          <h3 class="entry-company">Apna</h3>
+          <span class="entry-date">Sep 2021 – May 2023</span>
+        </div>
+        <p class="entry-role">Senior Manager — Monetization</p>
+        <p>
+          Designed zero-to-one monetization model for India's largest hiring marketplace. Scaled
+          revenue to $5M ARR across 100K customers, built self-serve checkout reaching 60K paid
+          customers, and created ML-based complaint handling that cut resolution time by 60%.
+        </p>
+      </article>
+
+      <article class="entry">
+        <div class="entry-header">
+          <h3 class="entry-company">Dalberg Advisors</h3>
+          <span class="entry-date">Jul 2019 – Aug 2021</span>
+        </div>
+        <p class="entry-role">Consultant (2 fast-track promotions)</p>
+        <p>
+          Impact-focused strategy consulting across Asia. Helped scale the Investing for
+          Development practice, channeling $500M+ toward financially excluded communities. Advised
+          state governments on sustainable mobility and pioneered a residency program that now
+          accounts for half of new hires.
+        </p>
+      </article>
+    </section>
+
+    <!-- Education: degrees, scholarships, and highlights. -->
+    <section id="education" aria-labelledby="education-title">
+      <h2 id="education-title" class="section-label">Education</h2>
+
+      <article class="entry">
+        <div class="entry-header">
+          <h3 class="entry-company">University of Chicago — Booth School of Business &amp; Department of Computer Science</h3>
+          <span class="entry-date">2024 – 2026</span>
+        </div>
+        <p class="edu-sub">MBA × MS in Computer Science (Joint Degree)</p>
+        <p>
+          Siebel Scholar &amp; J.N. Tata Scholar ($100K+ in merit-based scholarships)
+          <br />
+          Courses: Distributed Systems, Databases
+        </p>
+      </article>
+
+      <article class="entry">
+        <div class="entry-header">
+          <h3 class="entry-company">Indian Institute of Technology (IIT) Kharagpur</h3>
+          <span class="entry-date">2015 – 2019</span>
+        </div>
+        <p class="edu-sub">B.Tech in Industrial &amp; Systems Engineering</p>
+        <p>Hult Prize Finals (Top 3 of 2000+ global teams)</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-text">
+        Built by Aditya Kothari · 2025 ·
+        <a href="mailto:aditya.kothari@chicagobooth.edu">aditya.kothari@chicagobooth.edu</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Toggle nav background once the page is scrolled.
+    const nav = document.querySelector('.site-nav');
+    const setNavState = () => {
+      if (window.scrollY > 8) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    };
+
+    setNavState();
+    window.addEventListener('scroll', setNavState, { passive: true });
+  </script>
+</body>
+</html>
