@@ -265,6 +265,10 @@
       box-shadow: 0 18px 28px rgba(0, 0, 0, 0.28);
     }
 
+    .card + .card {
+      margin-top: 1.2rem;
+    }
+
     .work-title {
       font-family: "Fraunces", serif;
       font-size: clamp(1.35rem, 3.2vw, 1.75rem);
@@ -482,8 +486,8 @@
           <a href="#experience">Experience</a>
           <a href="#education">Education</a>
         </div>
-        <button class="theme-toggle" type="button" aria-pressed="true" aria-label="Switch to light mode" title="Switch theme">
-          <span class="theme-icon" aria-hidden="true">🌙</span>
+        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark mode" title="Switch theme">
+          <span class="theme-icon" aria-hidden="true">☀️</span>
         </button>
       </div>
     </div>
@@ -510,9 +514,34 @@
     <!-- Projects: featured project card and supporting metadata. -->
     <section id="work" aria-labelledby="work-title">
       <h2 id="work-title" class="section-label">Projects</h2>
+      <article class="card" aria-label="Booth AI Academic Advisor project">
+        <h3 class="work-title">AI Academic Advisor - Course Planning Agent for Chicago Booth</h3>
+        <p class="meta">LangGraph · RAG · OpenAI · FAISS · Streamlit · 2025</p>
+        <p class="work-desc">
+          Built with Arnav Agrawal as the final project for the Generative AI course at UChicago,
+          taught by Prof. Michael Spertus. Booth MBA students spend significant time searching
+          across portals, Slack, and scattered PDFs to find course information, bidding strategy,
+          and policy details. We built a single AI-powered assistant that answers all of it - from
+          "What are the prerequisites for course 30000?" to "Is this course worth taking?" to
+          "How should I bid in Phase 2?"
+          <br /><br />
+          The system is a LangGraph pipeline with an LLM router that classifies queries into
+          intents (course facts, sentiment, bidding, policy, planning), then dispatches to
+          deterministic tools for structured lookups (bid history, prerequisites, schedules,
+          evaluations) and RAG over curated policy documents and student reviews - running in
+          parallel. A synthesizer LLM combines both outputs with citations, preferring tool data
+          for factual queries and RAG for policy context. Key design decisions included keeping the
+          app stateless to prevent hallucination, adding an LLM-based course resolver to prune
+          invalid IDs before tool execution, and implementing keyword search as a fallback when
+          vector retrieval fails.
+        </p>
+        <div class="inline-links">
+          <a href="https://github.com/akothar0/ai-academic-advisor" target="_blank" rel="noopener noreferrer">GitHub →</a>
+        </div>
+      </article>
       <article class="card" aria-label="Mint AI Sports Card Discovery project">
         <h3 class="work-title">Mint — AI Sports Card Discovery</h3>
-        <p class="meta">React · Vite · AI Recommendations · 2025</p>
+        <p class="meta">React · Vite · AI Recommendations · 2026</p>
         <p class="work-desc">
           Built as my final project for the UI/UX Design course in UChicago's MS in Computer
           Science program, taught by Prof. Andre Marques.
@@ -528,14 +557,6 @@
           <a href="https://mint-omega-bay.vercel.app/" target="_blank" rel="noopener noreferrer">Live App →</a>
           <a href="https://github.com/akothar0/Mint-Sports-Cards" target="_blank" rel="noopener noreferrer">GitHub →</a>
           <a href="#" aria-label="Read the case study">Read the case study →</a>
-        </div>
-        <div class="tags" aria-label="Project tags">
-          <span class="tag">User Research</span>
-          <span class="tag">UX Design</span>
-          <span class="tag">AI/ML</span>
-          <span class="tag">Marketplace Discovery</span>
-          <span class="tag">React</span>
-          <span class="tag">Product Strategy</span>
         </div>
       </article>
     </section>
@@ -648,7 +669,7 @@
     };
 
     setNavState();
-    setTheme('dark');
+    setTheme('light');
     window.addEventListener('scroll', setNavState, { passive: true });
     themeToggle.addEventListener('click', () => {
       const isDark = themeToggle.getAttribute('aria-pressed') === 'true';
