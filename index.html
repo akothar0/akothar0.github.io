@@ -289,6 +289,18 @@
       max-width: 78ch;
     }
 
+    .work-desc a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 0.16em;
+      transition: color var(--transition);
+    }
+
+    .work-desc a:hover,
+    .work-desc a:focus-visible {
+      color: #66e3b1;
+    }
+
     .inline-links {
       margin-top: 1rem;
       display: flex;
@@ -542,14 +554,18 @@
         <h3 class="work-title">Mint — AI Sports Card Discovery</h3>
         <p class="meta">React · Vite · AI Recommendations · 2026</p>
         <p class="work-desc">
-          Built as my final project for the UI/UX Design course in UChicago's MS in Computer
-          Science program, taught by Prof. Andre Marques.
+          I collect sports trading cards, and the collector experience today is surprisingly
+          broken. Discovering cards worth adding to your collection, understanding why a card is
+          valuable, figuring out whether a price is fair, and learning the nuances between similar
+          cards all happen across 5-6 disconnected platforms, Discord servers, and tribal
+          knowledge from more experienced collectors. There is no single product that brings
+          discovery, education, and market intelligence together.
           <br /><br />
-          The sports trading card market is large and growing, but the collector journey is split
-          across 5-6 disconnected platforms. After conducting user research with collectors ranging
-          from casual hobbyists to investor-collectors, I identified discovery as the key
-          bottleneck and designed Mint: a personalized card discovery platform that combines
-          recommendations, market intelligence, and collection tracking.
+          Mint is an AI-powered discovery platform for collectors. It learns your preferences,
+          surfaces cards you would not have found on your own with plain-language explanations of
+          why they matter, provides market context at the point of decision, and tracks your
+          collection over time. Built as my final project for UChicago's UI/UX Design course,
+          taught by <a href="https://andremarques.xyz/" target="_blank" rel="noopener noreferrer">Prof. Andre Marques</a>.
         </p>
         <div class="inline-links">
           <a href="https://mint-omega-bay.vercel.app/" target="_blank" rel="noopener noreferrer">Live App →</a>
