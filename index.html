@@ -3,690 +3,437 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aditya Kothari | Portfolio</title>
+  <title>Aditya Kothari</title>
   <meta name="description" content="Portfolio of Aditya Kothari, Technical Product Manager." />
+  <meta property="og:title" content="Aditya Kothari" />
+  <meta property="og:description" content="Portfolio of Aditya Kothari, Technical Product Manager." />
+  <meta property="og:url" content="https://akothar0.github.io" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <script>
+    (function () {
+      var s = localStorage.getItem('theme');
+      var d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (s === 'dark' || (!s && d)) document.documentElement.classList.add('dark');
+    }());
+  </script>
   <style>
-    /* Core design tokens for theme, spacing, and motion. */
     :root {
-      --bg: #0c0c0e;
-      --bg-soft: #141418;
-      --bg-elevated: rgba(20, 20, 24, 0.92);
-      --bg-elevated-2: rgba(20, 20, 24, 0.78);
-      --bg-overlay: rgba(12, 12, 14, 0.72);
-      --bg-accent-glow: #1b1b22;
-      --text: #e8e8ec;
-      --text-muted: #9b9ba4;
-      --text-dim: #75757f;
-      --accent: #34d399;
-      --border: #222228;
-      --container: 980px;
-      --radius: 14px;
-      --transition: 220ms ease;
+      --bg: #fafaf9;
+      --text: #1a1a1a;
+      --muted: #6b7280;
+      --accent: #2563eb;
     }
 
-    body.light-mode {
-      --bg: #f6f3ed;
-      --bg-soft: #ffffff;
-      --bg-elevated: rgba(255, 255, 255, 0.95);
-      --bg-elevated-2: rgba(255, 255, 255, 0.82);
-      --bg-overlay: rgba(246, 243, 237, 0.82);
-      --bg-accent-glow: #efe5d7;
-      --text: #18161a;
-      --text-muted: #5d5861;
-      --text-dim: #7c7580;
-      --accent: #0f9f6e;
-      --border: #d8d0c7;
+    html.dark {
+      --bg: #111111;
+      --text: #e5e5e5;
+      --muted: #9ca3af;
+      --accent: #60a5fa;
     }
 
-    * {
+    *, *::before, *::after {
       box-sizing: border-box;
     }
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 64px;
     }
 
     body {
       margin: 0;
-      font-family: "Outfit", sans-serif;
-      background: radial-gradient(circle at 15% -10%, var(--bg-accent-glow) 0%, var(--bg) 40%), var(--bg);
+      background-color: var(--bg);
       color: var(--text);
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 17px;
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      animation: fade-in 0.45s ease-out both;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     .container {
-      width: min(100% - 2.5rem, var(--container));
+      max-width: 640px;
       margin: 0 auto;
+      padding: 0 24px;
     }
 
-    .site-nav {
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* Header nav — sticky */
+    .site-header {
       position: sticky;
       top: 0;
-      z-index: 100;
-      transition: background-color var(--transition), border-color var(--transition), backdrop-filter var(--transition);
-      border-bottom: 1px solid transparent;
-    }
-
-    .site-nav.scrolled {
-      background: var(--bg-overlay);
-      border-color: rgba(34, 34, 40, 0.9);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-
-    .nav-inner {
-      height: 68px;
+      z-index: 10;
+      background-color: var(--bg);
+      border-bottom: 1px solid rgba(107, 114, 128, 0.12);
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .brand,
-    .nav-links a,
-    .meta,
-    .section-label,
-    .hero-links,
-    .entry-date,
-    .footer-text,
-    .theme-toggle {
-      font-family: "JetBrains Mono", monospace;
-    }
-
-    .nav-actions {
-      display: flex;
       align-items: center;
-      gap: 1.2rem;
+      padding: 0.85rem 0;
+      transition: background-color 0.2s ease;
     }
 
-    .brand {
-      font-size: 0.95rem;
-      letter-spacing: 0.1em;
+    .nav-brand {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
       color: var(--text);
-      transition: color var(--transition);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.15s ease;
     }
 
-    .brand:hover {
-      color: var(--accent);
+    .nav-brand:hover {
+      color: var(--muted);
+      text-decoration: none;
     }
 
     .nav-links {
       display: flex;
-      gap: 1.4rem;
+      align-items: center;
+      gap: 1.1rem;
     }
 
     .nav-links a {
       font-size: 0.78rem;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      transition: color var(--transition);
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s ease;
     }
 
-    .nav-links a:hover,
-    .nav-links a:focus-visible {
-      color: var(--accent);
+    .nav-links a:hover {
+      color: var(--text);
+      text-decoration: none;
     }
 
-    .theme-toggle {
-      width: 2.7rem;
-      height: 2.7rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.03);
-      color: var(--text-muted);
-      border-radius: 999px;
-      padding: 0;
-      font-size: 1.1rem;
-      cursor: pointer;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
-      transition: color var(--transition), border-color var(--transition), background-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    .nav-sep {
+      color: var(--muted);
+      opacity: 0.4;
+      user-select: none;
+      font-size: 0.78rem;
     }
 
-    .theme-toggle:hover,
-    .theme-toggle:focus-visible {
-      color: var(--accent);
-      border-color: var(--accent);
-      transform: translateY(-1px) rotate(8deg);
-      box-shadow: 0 16px 28px rgba(0, 0, 0, 0.18);
-    }
-
-    .theme-toggle[aria-pressed="true"] {
-      color: var(--accent);
-      border-color: rgba(52, 211, 153, 0.45);
-      background: rgba(52, 211, 153, 0.08);
-    }
-
-    .theme-icon {
+    #theme-toggle {
+      background: none;
+      border: none;
+      padding: 0.2rem 0.3rem;
+      font-size: 1rem;
       line-height: 1;
-      transform: translateY(-1px);
+      cursor: pointer;
+      color: var(--muted);
+      font-family: inherit;
+      transition: color 0.15s ease;
+      margin-left: 0.4rem;
     }
 
+    #theme-toggle:hover {
+      color: var(--text);
+    }
+
+    /* Main */
     main {
-      padding: 2.25rem 0 5rem;
+      padding: 2rem 0 5rem;
     }
 
-    section {
-      opacity: 0;
-      transform: translateY(12px);
-      animation: section-in 560ms cubic-bezier(0.2, 0.75, 0.25, 1) forwards;
-      margin-bottom: 4.5rem;
-    }
-
-    section:nth-of-type(1) { animation-delay: 120ms; }
-    section:nth-of-type(2) { animation-delay: 220ms; }
-    section:nth-of-type(3) { animation-delay: 320ms; }
-    section:nth-of-type(4) { animation-delay: 420ms; }
-
-    @keyframes section-in {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
+    /* Hero */
     .hero h1 {
-      font-family: "Fraunces", serif;
-      font-size: clamp(2.4rem, 6vw, 4.2rem);
-      line-height: 1.05;
-      letter-spacing: 0.01em;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
       margin: 0 0 1rem;
-      font-weight: 700;
     }
 
-    .hero p {
-      max-width: 74ch;
-      color: var(--text-muted);
+    .bio {
+      margin: 0 0 0.85rem;
+      font-size: 1rem;
+    }
+
+    .contact-links {
       margin: 0;
-      font-size: clamp(1rem, 2.4vw, 1.2rem);
+      font-size: 0.95rem;
     }
 
-    .hero-links {
-      margin-top: 1.5rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.65rem;
-      font-size: 0.82rem;
-      letter-spacing: 0.02em;
+    .contact-links a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s ease;
     }
 
-    .hero-links a {
+    .contact-links a:hover {
       color: var(--accent);
-      transition: color var(--transition), transform var(--transition);
-      display: inline-flex;
-      align-items: center;
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
-    .hero-links a:hover,
-    .hero-links a:focus-visible {
-      color: #66e3b1;
-      transform: translateY(-1px);
-    }
-
-    .divider {
-      color: var(--text-dim);
+    .sep {
+      color: var(--muted);
+      margin: 0 0.4em;
+      opacity: 0.55;
       user-select: none;
     }
 
+    /* Personal note */
+    .personal-note {
+      margin-top: 3rem;
+    }
+
+    .personal-note p {
+      margin: 0;
+      font-size: 0.96rem;
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.7;
+      transition: color 0.2s ease;
+    }
+
+    /* Sections */
+    section {
+      margin-top: 4rem;
+    }
+
     .section-label {
-      margin: 0 0 1.05rem;
-      color: var(--text-dim);
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
+      font-size: 0.71rem;
+      font-weight: 400;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 1.75rem;
+      transition: color 0.2s ease;
     }
 
-    .card {
-      background: linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg-elevated-2) 100%);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.35rem 1.4rem;
-      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    /* Projects */
+    .project {
+      margin-bottom: 2.5rem;
     }
 
-    .card:hover {
-      transform: translateY(-3px);
-      border-color: #2a2a31;
-      box-shadow: 0 18px 28px rgba(0, 0, 0, 0.28);
+    .project:last-child {
+      margin-bottom: 0;
     }
 
-    .card + .card {
-      margin-top: 1.2rem;
+    .project-name {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.4;
+      letter-spacing: -0.01em;
+      margin: 0 0 0.4rem;
     }
 
-    .work-title {
-      font-family: "Fraunces", serif;
-      font-size: clamp(1.35rem, 3.2vw, 1.75rem);
+    .project-desc {
+      margin: 0 0 0.55rem;
+      font-size: 0.97rem;
+      line-height: 1.65;
+    }
+
+    .project-links {
       margin: 0;
+      font-size: 0.9rem;
     }
 
-    .meta {
-      margin: 0.5rem 0 0.95rem;
-      color: var(--text-dim);
-      font-size: 0.74rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+    .project-links a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s ease;
     }
 
-    .work-desc {
-      margin: 0;
-      color: var(--text-muted);
-      max-width: 78ch;
-    }
-
-    .work-desc a {
+    .project-links a:hover {
       color: var(--accent);
       text-decoration: underline;
-      text-underline-offset: 0.16em;
-      transition: color var(--transition);
+      text-underline-offset: 3px;
     }
 
-    .work-desc a:hover,
-    .work-desc a:focus-visible {
-      color: #66e3b1;
-    }
-
-    .inline-links {
-      margin-top: 1rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.95rem;
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.8rem;
-    }
-
-    .inline-links a {
-      color: var(--accent);
-      transition: color var(--transition), transform var(--transition);
-    }
-
-    .inline-links a:hover,
-    .inline-links a:focus-visible {
-      color: #66e3b1;
-      transform: translateY(-1px);
-    }
-
-    .tags {
-      margin-top: 1rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.55rem;
-    }
-
-    .tag {
-      border: 1px solid #2a2a2f;
-      border-radius: 999px;
-      padding: 0.27rem 0.62rem;
-      font-size: 0.73rem;
-      color: #b9b9c1;
-      background: rgba(255, 255, 255, 0.02);
-    }
-
+    /* Experience & Education */
     .entry {
-      padding: 0.95rem 0 1.35rem;
-      border-bottom: 1px solid var(--border);
+      margin-bottom: 2rem;
     }
 
     .entry:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
+      margin-bottom: 0;
     }
 
-    .entry-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 1rem;
-      margin-bottom: 0.18rem;
+    .entry-headline {
+      margin: 0 0 0.4rem;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
     }
 
-    .entry-company {
-      margin: 0;
-      font-family: "Fraunces", serif;
-      font-size: 1.26rem;
-      line-height: 1.2;
+    .entry-headline strong {
+      font-family: 'IBM Plex Sans', sans-serif;
       font-weight: 600;
+      font-size: 1rem;
     }
 
-    .entry-date {
-      color: var(--text-dim);
-      font-size: 0.75rem;
-      letter-spacing: 0.04em;
-      white-space: nowrap;
-    }
-
-    .entry-role {
-      margin: 0 0 0.55rem;
-      color: #b6b6be;
-      font-size: 0.98rem;
-    }
-
-    .entry p {
+    .entry-desc {
       margin: 0;
-      color: var(--text-muted);
-      max-width: 80ch;
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.65;
+      transition: color 0.2s ease;
     }
 
-    .edu-sub {
-      margin: 0.2rem 0 0.5rem;
-      color: #c1c1c8;
-      font-size: 0.98rem;
-    }
-
-    .footer {
-      border-top: 1px solid var(--border);
-      padding: 1.4rem 0 2rem;
+    /* Footer */
+    footer {
+      padding: 2.5rem 0 3rem;
     }
 
     .footer-text {
       margin: 0;
-      color: var(--text-dim);
-      font-size: 0.75rem;
-      letter-spacing: 0.03em;
+      font-size: 0.82rem;
+      color: var(--muted);
+      opacity: 0.6;
     }
 
-    .footer-text a {
-      color: var(--accent);
-      transition: color var(--transition);
+    /* Mobile */
+    @media (max-width: 520px) {
+      body { font-size: 16px; }
+      .hero h1 { font-size: 2rem; }
+      main { padding: 2rem 0 4rem; }
+      .nav-links { gap: 0.75rem; }
     }
 
-    .footer-text a:hover,
-    .footer-text a:focus-visible {
-      color: #66e3b1;
-    }
-
-    /* Mobile layout adjustments for tighter screens. */
-    @media (max-width: 760px) {
-      .container {
-        width: min(100% - 1.5rem, var(--container));
-      }
-
-      .nav-inner {
-        height: 60px;
-      }
-
-      .nav-links {
-        gap: 0.85rem;
-      }
-
-      .nav-links a {
-        font-size: 0.71rem;
-      }
-
-      .nav-actions {
-        gap: 0.7rem;
-      }
-
-      .theme-toggle {
-        width: 2.35rem;
-        height: 2.35rem;
-        font-size: 1rem;
-      }
-
-      main {
-        padding-top: 1.5rem;
-      }
-
-      section {
-        margin-bottom: 3.3rem;
-      }
-
-      .hero p {
-        font-size: 1rem;
-      }
-
-      .entry-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.24rem;
-      }
-
-      .entry-company {
-        font-size: 1.12rem;
-      }
-
-      .entry-date {
-        font-size: 0.72rem;
-      }
-
-      .card {
-        padding: 1.1rem;
-      }
-    }
-
-    /* Respect reduced-motion preferences for accessibility. */
     @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      section {
-        animation: none;
-        opacity: 1;
-        transform: none;
-      }
-
-      * {
-        transition: none !important;
-      }
+      html { scroll-behavior: auto; }
+      body { animation: none; }
+      *, *::before, *::after { transition: none !important; }
     }
   </style>
 </head>
 <body>
-  <!-- Sticky top navigation with frosted effect on scroll. -->
-  <nav class="site-nav" aria-label="Primary navigation">
-    <div class="container nav-inner">
-      <a class="brand" href="#top">AK</a>
-      <div class="nav-actions">
-        <div class="nav-links">
-          <a href="#work">Projects</a>
-          <a href="#experience">Experience</a>
-          <a href="#education">Education</a>
-        </div>
-        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark mode" title="Switch theme">
-          <span class="theme-icon" aria-hidden="true">☀️</span>
-        </button>
+  <div class="container">
+
+    <header class="site-header">
+      <a class="nav-brand" href="#hero-name">Overview</a>
+      <nav class="nav-links" aria-label="Page sections">
+        <a href="#projects">Projects</a>
+        <span class="nav-sep" aria-hidden="true">&middot;</span>
+        <a href="#experience">Experience</a>
+        <span class="nav-sep" aria-hidden="true">&middot;</span>
+        <a href="#education">Education</a>
+        <button id="theme-toggle" type="button" aria-label="Switch to dark mode">&#9728;</button>
+      </nav>
+    </header>
+
+    <main>
+
+      <section class="hero" aria-labelledby="hero-name">
+        <h1 id="hero-name">Aditya Kothari</h1>
+        <p class="bio">Product manager who builds. Shipped agentic recommendation systems at eBay, scaled a jobs marketplace to $5M ARR and 4M MAU at Apna. MBA &times; MS Computer Science at UChicago Booth. IIT Kharagpur. Siebel Scholar.</p>
+        <p class="contact-links">
+          <a href="mailto:aditya.kothari@chicagobooth.edu">aditya.kothari@chicagobooth.edu</a><span class="sep">&middot;</span><a href="https://www.linkedin.com/in/kothariaditya/" target="_blank" rel="noopener noreferrer">LinkedIn</a><span class="sep">&middot;</span><a href="https://github.com/akothar0" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </p>
+      </section>
+
+      <div class="personal-note">
+        <p>I like working on products where the user-facing problem looks simple but the system underneath is not &mdash; recommendation systems, developer platforms, data infrastructure. Work where product decisions and technical architecture are hard to separate.</p>
       </div>
-    </div>
-  </nav>
 
-  <main id="top" class="container">
-    <!-- Hero: concise profile summary and primary links. -->
-    <section class="hero" aria-labelledby="hero-title">
-      <h1 id="hero-title">Aditya Kothari</h1>
-      <p>
-        Technical Product Manager with 5+ years of experience. Shipped agentic recommendation
-        systems at eBay, scaled an online jobs marketplace to $5M ARR &amp; 4M Monthly Active Users
-        at Apna. MBA × MS Computer Science at UChicago. Industrial Engineering at IIT Kharagpur.
-      </p>
-      <div class="hero-links">
-        <a href="mailto:aditya.kothari@chicagobooth.edu">aditya.kothari@chicagobooth.edu</a>
-        <span class="divider">•</span>
-        <a href="https://www.linkedin.com/in/kothariaditya/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-        <span class="divider">•</span>
-        <a href="https://github.com/akothar0" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-      </div>
-    </section>
+      <section id="projects" aria-labelledby="projects-label">
+        <h2 id="projects-label" class="section-label">Projects</h2>
 
-    <!-- Projects: featured project card and supporting metadata. -->
-    <section id="work" aria-labelledby="work-title">
-      <h2 id="work-title" class="section-label">Projects</h2>
-      <article class="card" aria-label="Booth AI Academic Advisor project">
-        <h3 class="work-title">AI Academic Advisor - Course Planning Agent for Chicago Booth</h3>
-        <p class="meta">LangGraph · RAG · OpenAI · FAISS · Streamlit · 2025</p>
-        <p class="work-desc">
-          Booth MBA students spend significant time searching across portals, Slack, and scattered
-          PDFs to find course information, bidding strategy, and policy details. We built a single
-          AI-powered assistant that answers all of it - from "What are the prerequisites for Cases
-          in Financial Management?" to "Is this course worth taking?" to "How should I bid in
-          Phase 2?"
-          <br /><br />
-          The system is a LangGraph pipeline with an LLM router that classifies queries into
-          intents (course facts, sentiment, bidding, policy, planning), then dispatches to
-          deterministic tools for structured lookups (bid history, prerequisites, schedules,
-          evaluations) and RAG over curated policy documents and student reviews - running in
-          parallel. A synthesizer LLM combines both outputs with citations, preferring tool data
-          for factual queries and RAG for policy context. Key design decisions included keeping the
-          app stateless to prevent hallucination, adding an LLM-based course resolver to prune
-          invalid IDs before tool execution, and implementing keyword search as a fallback when
-          vector retrieval fails.
-        </p>
-        <div class="inline-links">
-          <a href="https://github.com/akothar0/ai-academic-advisor" target="_blank" rel="noopener noreferrer">GitHub →</a>
-        </div>
-      </article>
-      <article class="card" aria-label="Mint AI Sports Card Discovery project">
-        <h3 class="work-title">Mint - AI Sports Card Discovery</h3>
-        <p class="meta">React · Vite · AI Recommendations · 2026</p>
-        <p class="work-desc">
-          I collect sports trading cards, and the collector experience today is surprisingly
-          broken. Discovering cards worth adding to your collection, understanding why a card is
-          valuable, figuring out whether a price is fair, and learning the nuances between similar
-          cards all happen across 5-6 disconnected platforms, Discord servers, and tribal
-          knowledge from more experienced collectors. There is no single product that brings
-          discovery, education, and market intelligence together.
-          <br /><br />
-          Mint is an AI-powered discovery platform for collectors. It learns your preferences,
-          surfaces cards you would not have found on your own with plain-language explanations of
-          why they matter, provides market context at the point of decision, and tracks your
-          collection over time. Built as my final project for UChicago's UI/UX Design course,
-          taught by <a href="https://andremarques.xyz/" target="_blank" rel="noopener noreferrer">Prof. Andre Marques</a>.
-        </p>
-        <div class="inline-links">
-          <a href="https://mint-omega-bay.vercel.app/" target="_blank" rel="noopener noreferrer">Live App →</a>
-          <a href="https://github.com/akothar0/Mint-Sports-Cards" target="_blank" rel="noopener noreferrer">GitHub →</a>
-        </div>
-      </article>
-    </section>
+        <article class="project">
+          <h3 class="project-name">AI Academic Advisor</h3>
+          <p class="project-desc">LangGraph agent that answers Booth students&rsquo; questions about courses, bidding strategy, and degree requirements. Routes queries to deterministic tools or RAG based on intent, then synthesizes answers with citations. Built with OpenAI, FAISS, and Streamlit.</p>
+          <p class="project-links"><a href="https://github.com/akothar0/ai-academic-advisor" target="_blank" rel="noopener noreferrer">GitHub &rarr;</a></p>
+        </article>
 
-    <!-- Experience: reverse-chronological role history. -->
-    <section id="experience" aria-labelledby="experience-title">
-      <h2 id="experience-title" class="section-label">Experience</h2>
+        <article class="project">
+          <h3 class="project-name">Pok&eacute;Arena &mdash; Collect &amp; Battle</h3>
+          <p class="project-desc">Full-stack retro Pok&eacute;mon game &mdash; catch Pok&eacute;mons, build teams, and battle trainers with type advantages, STAB, and crits. Gym leader progression, community leaderboards, and player-vs-player challenges. Built with Next.js, TypeScript, Supabase (PostgreSQL + RLS), and Clerk.</p>
+          <p class="project-links"><a href="https://w3-nu.vercel.app/" target="_blank" rel="noopener noreferrer">Live &rarr;</a><span class="sep">&middot;</span><a href="https://github.com/akothar0/poke-arena" target="_blank" rel="noopener noreferrer">GitHub &rarr;</a></p>
+        </article>
 
-      <article class="entry">
-        <div class="entry-header">
-          <h3 class="entry-company">eBay</h3>
-          <span class="entry-date">Jun 2025 – Aug 2025</span>
-        </div>
-        <p class="entry-role">Technical Product Manager Intern — Discovery &amp; Personalization</p>
-        <p>
-          Worked on homepage personalization for eBay's Collectibles vertical, exploring agentic recommendation approaches combining LLMs with knowledge graphs.
-        </p>
-      </article>
+        <article class="project">
+          <h3 class="project-name">MPCSFaaS &mdash; Serverless Function Platform</h3>
+          <p class="project-desc">Distributed Function-as-a-Service platform built for UChicago&rsquo;s Distributed Systems course. REST API backed by Redis, with a task dispatcher that routes work to a pool of workers via ZMQ using both push and pull models. Includes fault tolerance with heartbeat-based failure detection.</p>
+        </article>
 
-      <article class="entry">
-        <div class="entry-header">
-          <h3 class="entry-company">Apna</h3>
-          <span class="entry-date">Jun 2023 – May 2024</span>
-        </div>
-        <p class="entry-role">Product Manager — User Growth</p>
-        <p>
-          Led the user-growth roadmap, increasing MAU by 30% to 4M+ through AI job recommendations, automated aggregation, and cross-channel campaigns reaching 1M+ daily touchpoints.
-        </p>
-      </article>
+        <article class="project">
+          <h3 class="project-name">Mint &mdash; AI Sports Card Discovery</h3>
+          <p class="project-desc">AI-powered discovery platform for sports card collectors. Surfaces cards with plain-language explanations of why they matter, learns preferences over time, and provides market context at the point of decision. Final project for UChicago&rsquo;s UI/UX Design course.</p>
+          <p class="project-links"><a href="https://mint-omega-bay.vercel.app/" target="_blank" rel="noopener noreferrer">Live &rarr;</a><span class="sep">&middot;</span><a href="https://github.com/akothar0/Mint-Sports-Cards" target="_blank" rel="noopener noreferrer">GitHub &rarr;</a></p>
+        </article>
+      </section>
 
-      <article class="entry">
-        <div class="entry-header">
-          <h3 class="entry-company">Apna</h3>
-          <span class="entry-date">Sep 2021 – May 2023</span>
-        </div>
-        <p class="entry-role">Senior Manager — Monetization</p>
-        <p>
-          Built the zero-to-one monetization model for India's largest hiring marketplace, scaling revenue to $5M ARR, launching self-serve checkout for 60K paid customers, and cutting complaint resolution time by 60%.
-        </p>
-      </article>
+      <section id="experience" aria-labelledby="experience-label">
+        <h2 id="experience-label" class="section-label">Experience</h2>
 
-      <article class="entry">
-        <div class="entry-header">
-          <h3 class="entry-company">Dalberg Advisors</h3>
-          <span class="entry-date">Jul 2019 – Aug 2021</span>
-        </div>
-        <p class="entry-role">Consultant (2 fast-track promotions)</p>
-        <p>
-          Advised public- and private-sector clients across Asia, helping channel $500M+ toward financially excluded communities while contributing to Dalberg's sustainable mobility and talent initiatives.
-        </p>
-      </article>
-    </section>
+        <article class="entry">
+          <p class="entry-headline"><strong>eBay</strong> &middot; Technical Product Manager Intern, Discovery &amp; Personalization &middot; 2025</p>
+          <p class="entry-desc">Defined the product strategy and spec for an agentic recommendation system in eBay&rsquo;s $11B Collectibles vertical &mdash; identifying where traditional recommendation approaches fall short and making the case for combining LLMs with knowledge graphs. Drove alignment with engineering and senior stakeholders, and designed the experiment framework to validate the core hypothesis.</p>
+        </article>
 
-    <!-- Education: degrees, scholarships, and highlights. -->
-    <section id="education" aria-labelledby="education-title">
-      <h2 id="education-title" class="section-label">Education</h2>
+        <article class="entry">
+          <p class="entry-headline"><strong>Apna</strong> &middot; Product Manager, User Growth &middot; 2023&ndash;2024</p>
+          <p class="entry-desc">India&rsquo;s largest hiring platform ($1.1B valuation). Led user growth &amp; retention &mdash; AI job recommendations, automated job aggregation from 1,200+ sources, and cross-channel communications products that took MAU to 4M+.</p>
+        </article>
 
-      <article class="entry">
-        <div class="entry-header">
-          <h3 class="entry-company">University of Chicago — Booth School of Business &amp; Department of Computer Science</h3>
-          <span class="entry-date">2024 – 2026</span>
-        </div>
-        <p class="edu-sub">MBA × MS in Computer Science (Joint Degree)</p>
-        <p>
-          Siebel Scholar &amp; J.N. Tata Scholar ($100K+ in merit-based scholarships)
-          <br />
-          Courses: Distributed Systems, Databases, Pricing Strategies, GPU Programming
-        </p>
-      </article>
+        <article class="entry">
+          <p class="entry-headline"><strong>Apna</strong> &middot; Senior Manager, Monetization &middot; 2021&ndash;2023</p>
+          <p class="entry-desc">Built the zero-to-one monetization model. Scaled revenue to $5M ARR, launched self-serve checkout for 60K paid customers, and shipped an ML-based complaint handling system that cut resolution time by 60%.</p>
+        </article>
 
-      <article class="entry">
-        <div class="entry-header">
-          <h3 class="entry-company">Indian Institute of Technology (IIT) Kharagpur</h3>
-          <span class="entry-date">2015 – 2019</span>
-        </div>
-        <p class="edu-sub">B.Tech in Industrial &amp; Systems Engineering</p>
-        <p>Hult Prize Finals (Top 3 of 2000+ global teams)</p>
-      </article>
-    </section>
-  </main>
+        <article class="entry">
+          <p class="entry-headline"><strong>Dalberg Advisors</strong> &middot; Consultant &middot; 2019&ndash;2021</p>
+          <p class="entry-desc">Impact-focused strategy consulting across Asia. Two fast-track promotions. Helped channel $500M+ toward financially excluded communities.</p>
+        </article>
+      </section>
 
-  <footer class="footer">
-    <div class="container">
-      <p class="footer-text">
-        Built by Aditya Kothari · 2026 ·
-        <a href="mailto:aditya.kothari@chicagobooth.edu">aditya.kothari@chicagobooth.edu</a>
-      </p>
-    </div>
-  </footer>
+      <section id="education" aria-labelledby="education-label">
+        <h2 id="education-label" class="section-label">Education</h2>
+
+        <article class="entry">
+          <p class="entry-headline"><strong>University of Chicago</strong> &middot; MBA &times; MS in Computer Science &middot; 2024&ndash;2026</p>
+          <p class="entry-desc">Siebel Scholar (merit award, top 5% of class). Distributed Systems, Databases, Algorithms.</p>
+        </article>
+
+        <article class="entry">
+          <p class="entry-headline"><strong>IIT Kharagpur</strong> &middot; B.Tech, Industrial &amp; Systems Engineering &middot; 2015&ndash;2019</p>
+          <p class="entry-desc">Hult Prize Finals &mdash; Top 3 of 2,000+ global teams.</p>
+        </article>
+      </section>
+
+    </main>
+
+    <footer>
+      <p class="footer-text">Built by Aditya Kothari &middot; 2026</p>
+    </footer>
+
+  </div>
 
   <script>
-    // Toggle nav background once the page is scrolled.
-    const nav = document.querySelector('.site-nav');
-    const themeToggle = document.querySelector('.theme-toggle');
-    const themeIcon = themeToggle.querySelector('.theme-icon');
-    const setNavState = () => {
-      if (window.scrollY > 8) {
-        nav.classList.add('scrolled');
-      } else {
-        nav.classList.remove('scrolled');
-      }
-    };
-
-    const setTheme = (mode) => {
-      const isDark = mode === 'dark';
-      document.body.classList.toggle('light-mode', !isDark);
-      themeToggle.setAttribute('aria-pressed', String(isDark));
-      themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-      themeIcon.textContent = isDark ? '🌙' : '☀️';
-    };
-
-    setNavState();
-    setTheme('light');
-    window.addEventListener('scroll', setNavState, { passive: true });
-    themeToggle.addEventListener('click', () => {
-      const isDark = themeToggle.getAttribute('aria-pressed') === 'true';
-      setTheme(isDark ? 'light' : 'dark');
+    var btn = document.getElementById('theme-toggle');
+    function sync() {
+      var dark = document.documentElement.classList.contains('dark');
+      btn.innerHTML = dark ? '&#9790;' : '&#9728;';
+      btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+    sync();
+    btn.addEventListener('click', function () {
+      var dark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', dark ? 'dark' : 'light');
+      sync();
     });
   </script>
 </body>
