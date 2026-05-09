@@ -22,7 +22,7 @@
     :root {
       --bg: #fafaf9;
       --text: #1a1a1a;
-      --muted: #6b7280;
+      --muted: #525a64;
       --accent: #2563eb;
     }
 
@@ -77,6 +77,16 @@
       text-underline-offset: 3px;
     }
 
+    :focus:not(:focus-visible) {
+      outline: none;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
     /* Header nav — sticky */
     .site-header {
       position: sticky;
@@ -87,18 +97,22 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.85rem 0;
+      padding: 0.25rem 0;
       transition: background-color 0.2s ease;
     }
 
     .nav-brand {
       font-family: 'IBM Plex Sans', sans-serif;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       font-weight: 600;
       color: var(--text);
       text-decoration: none;
       letter-spacing: 0.05em;
       transition: color 0.15s ease;
+      padding: 0.85rem 0;
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
     }
 
     .nav-brand:hover {
@@ -113,11 +127,15 @@
     }
 
     .nav-links a {
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       letter-spacing: 0.05em;
       color: var(--muted);
       text-decoration: none;
       transition: color 0.15s ease;
+      padding: 0.85rem 0.25rem;
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
     }
 
     .nav-links a:hover {
@@ -129,13 +147,13 @@
       color: var(--muted);
       opacity: 0.4;
       user-select: none;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
     }
 
     #theme-toggle {
       background: none;
       border: none;
-      padding: 0.2rem 0.3rem;
+      padding: 0;
       font-size: 1rem;
       line-height: 1;
       cursor: pointer;
@@ -143,6 +161,11 @@
       font-family: inherit;
       transition: color 0.15s ease;
       margin-left: 0.4rem;
+      min-width: 44px;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     #theme-toggle:hover {
@@ -171,7 +194,7 @@
 
     .contact-links {
       margin: 0;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
 
     .contact-links a {
@@ -200,7 +223,7 @@
 
     .personal-note p {
       margin: 0;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-style: italic;
       color: var(--muted);
       line-height: 1.7;
@@ -213,7 +236,7 @@
     }
 
     .section-label {
-      font-size: 0.71rem;
+      font-size: 0.75rem;
       font-weight: 400;
       letter-spacing: 0.13em;
       text-transform: uppercase;
@@ -232,16 +255,24 @@
     }
 
     .project-name {
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 600;
-      line-height: 1.4;
+      line-height: 1.5;
       margin: 0 0 0.4rem;
     }
 
     .project-desc {
       margin: 0 0 0.55rem;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       line-height: 1.65;
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+
+    .project-desc strong,
+    .entry-desc strong {
+      color: var(--text);
+      font-weight: 600;
     }
 
     .project-links {
@@ -283,9 +314,14 @@
       font-size: 1rem;
     }
 
+    .entry-year {
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+
     .entry-desc {
       margin: 0;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: var(--muted);
       line-height: 1.65;
       transition: color 0.2s ease;
@@ -298,9 +334,9 @@
 
     .footer-text {
       margin: 0;
-      font-size: 0.82rem;
+      font-size: 0.75rem;
       color: var(--muted);
-      opacity: 0.6;
+      opacity: 0.7;
     }
 
     /* Mobile */
@@ -358,18 +394,18 @@
         </article>
 
         <article class="project">
-          <h3 class="project-name">Pok&eacute;Arena &mdash; Collect &amp; Battle</h3>
+          <h3 class="project-name">Pok&eacute;Arena - Collect &amp; Battle</h3>
           <p class="project-desc">Full-stack retro Pok&eacute;mon game &mdash; catch Pok&eacute;mons, build teams, and battle trainers with type advantages, STAB, and crits. Gym leader progression, community leaderboards, and player-vs-player challenges. Built with Next.js, TypeScript, Supabase (PostgreSQL + RLS), and Clerk.</p>
           <p class="project-links"><a href="https://w3-nu.vercel.app/" target="_blank" rel="noopener noreferrer">Live &rarr;</a><span class="sep">&middot;</span><a href="https://github.com/akothar0/poke-arena" target="_blank" rel="noopener noreferrer">GitHub &rarr;</a></p>
         </article>
 
         <article class="project">
-          <h3 class="project-name">MPCSFaaS &mdash; Serverless Function Platform</h3>
+          <h3 class="project-name">MPCSFaaS - Serverless Function Platform</h3>
           <p class="project-desc">Distributed Function-as-a-Service platform built for UChicago&rsquo;s Distributed Systems course. REST API backed by Redis, with a task dispatcher that routes work to a pool of workers via ZMQ using both push and pull models. Includes fault tolerance with heartbeat-based failure detection.</p>
         </article>
 
         <article class="project">
-          <h3 class="project-name">Mint &mdash; AI Sports Card Discovery</h3>
+          <h3 class="project-name">Mint - AI Sports Card Discovery</h3>
           <p class="project-desc">AI-powered discovery platform for sports card collectors. Surfaces cards with plain-language explanations of why they matter, learns preferences over time, and provides market context at the point of decision. Final project for UChicago&rsquo;s UI/UX Design course.</p>
           <p class="project-links"><a href="https://mint-omega-bay.vercel.app/" target="_blank" rel="noopener noreferrer">Live &rarr;</a><span class="sep">&middot;</span><a href="https://github.com/akothar0/Mint-Sports-Cards" target="_blank" rel="noopener noreferrer">GitHub &rarr;</a></p>
         </article>
@@ -379,22 +415,22 @@
         <h2 id="experience-label" class="section-label">Experience</h2>
 
         <article class="entry">
-          <p class="entry-headline"><strong>eBay</strong> &middot; Technical Product Manager Intern, Discovery &amp; Personalization &middot; 2025</p>
+          <p class="entry-headline"><strong>eBay</strong> &middot; Technical Product Manager Intern, Discovery &amp; Personalization <span class="entry-year">&middot; 2025</span></p>
           <p class="entry-desc">Defined the product strategy and spec for an agentic recommendation system in eBay&rsquo;s $11B Collectibles vertical &mdash; identifying where traditional recommendation approaches fall short and making the case for combining LLMs with knowledge graphs. Drove alignment with engineering and senior stakeholders, and designed the experiment framework to validate the core hypothesis.</p>
         </article>
 
         <article class="entry">
-          <p class="entry-headline"><strong>Apna</strong> &middot; Product Manager, User Growth &middot; 2023&ndash;2024</p>
+          <p class="entry-headline"><strong>Apna</strong> &middot; Product Manager, User Growth <span class="entry-year">&middot; 2023&ndash;2024</span></p>
           <p class="entry-desc">India&rsquo;s largest hiring platform ($1.1B valuation). Led user growth &amp; retention &mdash; AI job recommendations, automated job aggregation from 1,200+ sources, and cross-channel communications products that took MAU to 4M+.</p>
         </article>
 
         <article class="entry">
-          <p class="entry-headline"><strong>Apna</strong> &middot; Senior Manager, Monetization &middot; 2021&ndash;2023</p>
+          <p class="entry-headline"><strong>Apna</strong> &middot; Senior Manager, Monetization <span class="entry-year">&middot; 2021&ndash;2023</span></p>
           <p class="entry-desc">Built the zero-to-one monetization model. Scaled revenue to $5M ARR, launched self-serve checkout for 60K paid customers, and shipped an ML-based complaint handling system that cut resolution time by 60%.</p>
         </article>
 
         <article class="entry">
-          <p class="entry-headline"><strong>Dalberg Advisors</strong> &middot; Consultant &middot; 2019&ndash;2021</p>
+          <p class="entry-headline"><strong>Dalberg Advisors</strong> &middot; Consultant <span class="entry-year">&middot; 2019&ndash;2021</span></p>
           <p class="entry-desc">Impact-focused strategy consulting across Asia. Two fast-track promotions. Helped channel $500M+ toward financially excluded communities.</p>
         </article>
       </section>
@@ -403,12 +439,12 @@
         <h2 id="education-label" class="section-label">Education</h2>
 
         <article class="entry">
-          <p class="entry-headline"><strong>University of Chicago</strong> &middot; MBA &times; MS in Computer Science &middot; 2024&ndash;2026</p>
+          <p class="entry-headline"><strong>University of Chicago</strong> &middot; MBA &times; MS in Computer Science <span class="entry-year">&middot; 2024&ndash;2026</span></p>
           <p class="entry-desc">Siebel Scholar (merit award, top 5% of class). Distributed Systems, Databases, Algorithms.</p>
         </article>
 
         <article class="entry">
-          <p class="entry-headline"><strong>IIT Kharagpur</strong> &middot; B.Tech, Industrial &amp; Systems Engineering &middot; 2015&ndash;2019</p>
+          <p class="entry-headline"><strong>IIT Kharagpur</strong> &middot; B.Tech, Industrial &amp; Systems Engineering <span class="entry-year">&middot; 2015&ndash;2019</span></p>
           <p class="entry-desc">Hult Prize Finals &mdash; Top 3 of 2,000+ global teams.</p>
         </article>
       </section>
